@@ -6,7 +6,7 @@ const btnLimpar = document.getElementById('limpar');
 const msg = document.getElementById('msg');
 
 const tabelaBody = document.querySelector('#tabela tbody');
-const media = document.getElementById('media');
+const media1 = document.getElementById('media');
 const situacao = document.getElementById('situacao');
 
 let lancamentos = [];
@@ -58,7 +58,7 @@ function carregar() {
 /** Recalcula média e situação e atualiza UI */
 function atualizaResumo() {
   if (lancamentos.length === 0) {
-    media.textContent = '0,00';
+    media1.textContent = '0.00';
     situacao.textContent = '—';
     situacao.className = '';
     return;
@@ -67,7 +67,7 @@ function atualizaResumo() {
   const soma = lancamentos.reduce((acc, item) => acc + item.nota, 0);
   const media = soma / lancamentos.length;
 
-  media.textContent = fmt2(media);
+  media1.textContent = format2(media);
 
   // Situação
   let sit = '';
@@ -93,7 +93,7 @@ function renderTabela() {
     td.style.color = '#666';
     tr.appendChild(td);
     tabelaBody.appendChild(tr);
-    atualizarResumo();
+    atualizaResumo();
     return;
   }
 
@@ -104,7 +104,7 @@ function renderTabela() {
     tdDisc.textContent = item.disciplina;
 
     const tdNota = document.createElement('td');
-    tdNota.textContent = fmt2(item.nota);
+    tdNota.textContent = format2(item.nota);
 
     const tdAcoes = document.createElement('td');
     // Botão remover
@@ -152,7 +152,7 @@ function adicionarLancamento(disciplina, notaStr) {
 
   // adiciona ao estado
   lancamentos.push({
-    id: uid(),
+    id: util(),
     disciplina: nome,
     nota
   });
